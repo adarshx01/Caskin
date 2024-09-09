@@ -1,33 +1,38 @@
 'use client'
-import { usePathname } from 'next/navigation'
-import React from 'react'
+
 import { cn } from '@/lib/utils'
+import { usePathname } from 'next/navigation'
+
+const STEPS = [
+  {
+    name: 'Step 1: Add image',
+    description: 'Choose an image for your case',
+    url: '/upload',
+  },
+  {
+    name: 'Step 2: Customize design',
+    description: 'Make the case yours',
+    url: '/design',
+  },
+  {
+    name: 'Step 3: Summary',
+    description: 'Review your final design',
+    url: '/preview',
+  },
+]
+
 const Steps = () => {
-    const STEPS=[
-        {
-            title: 'Step 1',
-            description: 'Choose image for your case/skin',
-            url: '/upload',
-        },
-        {
-            title: 'Step 2',
-            description: 'Make the case yours',
-            url: '/design',
-        },
-        {
-            title: 'Step 1',
-            description: 'Review the final design',
-            url: '/preview',
-        }
-    ]
-    const pathname = usePathname();
+  const pathname = usePathname()
+
   return (
-    <ol className='rounded-md lg:border-l lg:border-r bg-white lg:flex lg:rounded-none lg:border-gray-200'>
-      {STEPS.map((step,i)=>{
+    <ol className='rounded-md bg-white lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200'>
+      {STEPS.map((step, i) => {
         const isCurrent = pathname.endsWith(step.url)
-        const isCompleted = STEPS.slice(i+1).some((step) => 
-        pathname.endsWith(step.url))
-        const imgPath = `/snake-${i+1}.png`
+        const isCompleted = STEPS.slice(i + 1).some((step) =>
+          pathname.endsWith(step.url)
+        )
+        const imgPath = `/snake-${i + 1}.png`
+
         return (
           <li key={step.name} className='relative overflow-hidden lg:flex-1'>
             <div>
